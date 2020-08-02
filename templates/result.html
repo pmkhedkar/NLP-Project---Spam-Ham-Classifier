@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Spam SMS Detector</title>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='spam-favicon.ico') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+		<style type="text/css">
+		.blink_me {
+			color: red;
+  		animation: blinker 1s linear infinite;
+		}
+
+		@keyframes blinker {
+  		50% {
+    	opacity: 0;
+  			}
+  		}
+  		body {
+  		background-image: {{ url_for('static', filename='164622.jpg') }};
+		}
+		.safe{
+			color:green;
+		}
+		.danger{
+			color:red;
+		}
+  		</style>
+
+		<script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+	</head>
+
+	<body background='/static/164622.jpg' >
+
+		<!-- Website Title -->
+		<div class="container">
+			<h2 class='container-heading'><span>Spam Message(SMS) Detector</span></h2>
+	        	<div class='description'>
+				<p>A Machine Learning Web App, Built with Flask, Deployed using Heroku.</p>
+			</div>
+		</div>
+
+		<!-- Result -->
+		<center>
+		<div class="result">
+			{% if prediction[0]=='spam' %}
+				<img class="gif" src="{{ url_for('static', filename='download.jpg') }}" alt="SPAM Image">
+				<h1><span class='blink_me'>Gotcha! This is a SPAM message.</span></h1>
+				
+			{% elif prediction[0]=='ham' %}
+				<h1><span class='safe'>Great! This is NOT a spam message.</span></h1>
+			{% endif %}
+		</div>
+		</center>
+
+	</body>
+</html>
